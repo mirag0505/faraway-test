@@ -3,14 +3,27 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import { useAppSelector, increment, useAppDispatch } from "./counterReducer";
 import { Button, Space } from "antd";
+import { useGetPeopleByNumberQuery } from "./service";
 
 function App() {
   const countFromReducer = useAppSelector((state) => state.counter.value);
   const dispatch = useAppDispatch();
+  const { data, error, isLoading } = useGetPeopleByNumberQuery("2");
 
   return (
     <>
       <div>
+        {isLoading ? (
+          <>
+            {error ? (
+              <pre>{JSON.stringify(error)}</pre>
+            ) : (
+              <pre>{JSON.stringify(data)}</pre>
+            )}
+          </>
+        ) : (
+          "Loading..."
+        )}
         <a href="https://vitejs.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>
