@@ -1,45 +1,55 @@
 import reactLogo from "./assets/react.svg";
+import starWarsLogo from "./assets/star.png";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import { useAppSelector, increment, useAppDispatch } from "./counterReducer";
 import { Button, Space } from "antd";
-import { useGetPeopleByNumberQuery } from "./service";
+import { useGetPersonByNumberQuery, useGetPeopleQuery } from "./service";
+import { Card } from "antd";
 
 function App() {
   const countFromReducer = useAppSelector((state) => state.counter.value);
   const dispatch = useAppDispatch();
-  const { data, error, isLoading } = useGetPeopleByNumberQuery("2");
+  const { data, error, isLoading } = useGetPeopleQuery();
 
+  const { Meta } = Card;
   return (
     <>
+      <h1>Star wars</h1>
       <div>
         {isLoading ? (
+          <img src={reactLogo} className="logo react" alt="React logo" />
+        ) : (
           <>
             {error ? (
               <pre>{JSON.stringify(error)}</pre>
             ) : (
-              <pre>{JSON.stringify(data)}</pre>
+              <div
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                }}>
+                {data?.results?.map((person) => (
+                  <Card
+                    key={person?.url}
+                    hoverable
+                    bordered={false}
+                    style={{ flex: "0 0 30%", margin: "10px" }}
+                    cover={<img alt={person?.url} src={starWarsLogo} />}>
+                    <Meta title={person?.name} description={person?.url} />
+                  </Card>
+                ))}
+              </div>
             )}
           </>
-        ) : (
-          "Loading..."
         )}
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <Button onClick={() => dispatch(increment())}>
-          count is {countFromReducer}
-        </Button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
+      <Button onClick={() => dispatch(increment())}>
+        count is {countFromReducer}
+      </Button>
+      <p>
+        Edit <code>src/App.tsx</code> and save to test HMR
+      </p>
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>

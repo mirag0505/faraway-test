@@ -23,7 +23,10 @@ export const swapiApi = createApi({
   reducerPath: "swapiApi",
   baseQuery: fetchBaseQuery({ baseUrl: "https://swapi.dev/api/" }),
   endpoints: (builder) => ({
-    getPeopleByNumber: builder.query<People, string>({
+    getPeople: builder.query<{ results: Array<People> }, void>({
+      query: () => `people`,
+    }),
+    getPersonByNumber: builder.query<People, string>({
       query: (number) => `people/${number}`,
     }),
   }),
@@ -31,4 +34,4 @@ export const swapiApi = createApi({
 
 // Export hooks for usage in function components, which are
 // auto-generated based on the defined endpoints
-export const { useGetPeopleByNumberQuery } = swapiApi;
+export const { useGetPeopleQuery, useGetPersonByNumberQuery } = swapiApi;
