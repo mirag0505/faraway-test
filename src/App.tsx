@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import { useAppSelector, increment, useAppDispatch } from "./counterReducer";
+import { Button, Space } from "antd";
 
 function App() {
   const countFromReducer = useAppSelector((state) => state.counter.value);
@@ -20,9 +20,9 @@ function App() {
       </div>
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => dispatch(increment())}>
+        <Button onClick={() => dispatch(increment())}>
           count is {countFromReducer}
-        </button>
+        </Button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
