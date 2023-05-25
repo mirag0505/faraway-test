@@ -4,11 +4,23 @@ import { Provider } from "react-redux";
 import App from "./App.tsx";
 import "./index.css";
 import { store } from "./store.ts";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+  },
+  {
+    path: "/info",
+    element: <div>Hello world!</div>,
+  },
+]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <RouterProvider router={router} />
     </Provider>
   </React.StrictMode>
 );
