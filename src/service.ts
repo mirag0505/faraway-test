@@ -29,9 +29,9 @@ export const swapiApi = createApi({
     getPersonByNumber: builder.query<People, string>({
       query: (number) => `people/${number}`,
     }),
-    getPeopleByPage: builder.query<{ results: Array<People> }, string>({
+    getPeopleByPage: builder.query<{ results: Array<People>, count: number }, string>({
       query: (number) => `people/?page=${number}`,
-      keepUnusedDataFor: 5,
+      keepUnusedDataFor: 10,
     }),
   }),
 });
