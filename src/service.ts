@@ -29,9 +29,13 @@ export const swapiApi = createApi({
     getPersonByNumber: builder.query<People, string>({
       query: (number) => `people/${number}`,
     }),
+    getPeopleByPage: builder.query<People, string>({
+      query: (number) => `people/?page=${number}`,
+      keepUnusedDataFor: 5,
+    }),
   }),
 });
 
 // Export hooks for usage in function components, which are
 // auto-generated based on the defined endpoints
-export const { useGetPeopleQuery, useGetPersonByNumberQuery } = swapiApi;
+export const { useGetPeopleQuery, useGetPersonByNumberQuery, useGetPeopleByPageQuery } = swapiApi;
