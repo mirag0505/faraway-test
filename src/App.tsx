@@ -6,6 +6,7 @@ import { useAppSelector, increment, useAppDispatch } from "./counterReducer";
 import { Button, Space } from "antd";
 import { useGetPersonByNumberQuery, useGetPeopleQuery } from "./service";
 import { Card } from "antd";
+import { Outlet, Link } from "react-router-dom";
 
 function App() {
   const countFromReducer = useAppSelector((state) => state.counter.value);
@@ -18,7 +19,7 @@ function App() {
       <h1>Star wars</h1>
       <div>
         {isLoading ? (
-          <img src={reactLogo} className="logo react" alt="React logo" />
+          <img src={reactLogo} className="logo react logo-spin" alt="React logo" />
         ) : (
           <>
             {error ? (
@@ -30,14 +31,19 @@ function App() {
                   flexWrap: "wrap",
                 }}>
                 {data?.results?.map((person) => (
-                  <Card
+                  <Link
                     key={person?.url}
-                    hoverable
-                    bordered={false}
-                    style={{ flex: "0 0 30%", margin: "10px" }}
-                    cover={<img alt={person?.url} src={starWarsLogo} />}>
-                    <Meta title={person?.name} description={person?.url} />
-                  </Card>
+                    to={`contacts/${
+                      person.url.split("/")[person.url.split("/").length]
+                    }`}>
+                    <Card
+                      hoverable
+                      bordered={false}
+                      style={{ flex: "0 0 30%", margin: "10px" }}
+                      cover={<img alt={person?.url} src={starWarsLogo} />}>
+                      <Meta title={person?.name} description={person?.url} />
+                    </Card>
+                  </Link>
                 ))}
               </div>
             )}
