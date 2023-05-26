@@ -1,25 +1,22 @@
-import reactLogo from "./assets/react.svg";
 import starWarsLogo from "./assets/star.png";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import { useAppSelector, increment, useAppDispatch } from "./counterReducer";
-import { Button, Space } from "antd";
-import { useGetPersonByNumberQuery, useGetPeopleByPageQuery, useGetPeopleQuery } from "./service";
+import { Button } from "antd";
+import { useGetPeopleByPageQuery } from "./service";
 import { Card } from "antd";
-import { Outlet, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getNumberPersonFromUrl } from "./utilites/getNumberPersonFromUrl";
-import { Pagination } from 'antd';
+import { Pagination } from "antd";
 import { useState } from "react";
+import { Spin } from 'antd';
 
 function App() {
   const countFromReducer = useAppSelector((state) => state.counter.value);
   const dispatch = useAppDispatch();
-  const [query, setQuery] = useState('');
-  const { data, error, isLoading } = useGetPeopleQuery();
-  const { data: dataPage, error: errorPage, isLoading: isLoadingPage } = useGetPeopleByPageQuery(query);
+  const [query, setQuery] = useState("");
+  const { data, error, isLoading } = useGetPeopleByPageQuery(query);
 
   const { Meta } = Card;
-  // TODO изменить тип на адекватный
   const handleChange = (event: any) => {
     setQuery(event);
   };
@@ -27,11 +24,8 @@ function App() {
     <>
       <h1>Star wars</h1>
       <div>
-        {
-          isLoadingPage ? <img src={reactLogo} className="logo react logo-spin" alt="React logo" /> : <pre>{JSON.stringify(dataPage)}</pre>
-        }
         {isLoading ? (
-          <img src={reactLogo} className="logo react logo-spin" alt="React logo" />
+        <Spin/>
         ) : (
           <>
             {error ? (
@@ -42,14 +36,16 @@ function App() {
                   display: "flex",
                   flexWrap: "wrap",
                 }}>
-                  <Pagination defaultCurrent={1} total={50} onChange={handleChange}/>
-                {/* {data?.results?.map((person) => (
+                <Pagination
+                  defaultCurrent={1}
+                  total={50}
+                  onChange={handleChange}
+                />
+                {data?.results?.map((person) => (
                   <Link
                     key={person?.url}
                     style={{ flex: "0 0 30%", margin: "10px" }}
-                    to={`people/${
-                      getNumberPersonFromUrl(person.url)
-                    }`}>
+                    to={`people/${getNumberPersonFromUrl(person.url)}`}>
                     <Card
                       hoverable
                       bordered={false}
@@ -57,21 +53,17 @@ function App() {
                       <Meta title={person?.name} description={person?.url} />
                     </Card>
                   </Link>
-                ))} */}
+                ))}
+                <Pagination
+                  defaultCurrent={1}
+                  total={50}
+                  onChange={handleChange}
+                />
               </div>
             )}
           </>
         )}
       </div>
-      <Button onClick={() => dispatch(increment())}>
-        count is {countFromReducer}
-      </Button>
-      <p>
-        Edit <code>src/App.tsx</code> and save to test HMR
-      </p>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   );
 }
