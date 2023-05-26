@@ -34,7 +34,7 @@ function App() {
                 {data?.results?.map((person) => (
                   <Link
                     key={person?.url}
-                    to={`person/${
+                    to={`people/${
                       getNumberPersonFromUrl(person.url)
                     }`}>
                     <Card
