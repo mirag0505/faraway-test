@@ -7,6 +7,7 @@ import { Button, Space } from "antd";
 import { useGetPersonByNumberQuery, useGetPeopleQuery } from "./service";
 import { Card } from "antd";
 import { Outlet, Link } from "react-router-dom";
+import { getNumberPersonFromUrl } from "./utilites/getNumberPersonFromUrl";
 
 function App() {
   const countFromReducer = useAppSelector((state) => state.counter.value);
@@ -33,8 +34,8 @@ function App() {
                 {data?.results?.map((person) => (
                   <Link
                     key={person?.url}
-                    to={`contacts/${
-                      person.url.split("/")[person.url.split("/").length]
+                    to={`person/${
+                      getNumberPersonFromUrl(person.url)
                     }`}>
                     <Card
                       hoverable
