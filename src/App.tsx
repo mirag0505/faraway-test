@@ -6,9 +6,9 @@ import { useGetPeopleByPageQuery } from "./service";
 import { useState } from "react";
 import { FC } from 'react'
 
-type AppProps = void
+// type AppProps = {}
 
-export const App: FC<AppProps> = () => {
+export const App: FC = () => {
   const [query, setQuery] = useState("1");
   const { data, error, isLoading } = useGetPeopleByPageQuery(query);
 

@@ -2,18 +2,18 @@ import { FC } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetPersonByNumberQuery } from "../service";
 import { Button, Form, Input, InputNumber, Spin } from "antd";
-// type EditorProps = {
+import { useAppDispatch } from "../redux/slicer";
 
-// }
+// type EditorProps = {}
 
 export const Editor: FC = () => {
   const { peopleId } = useParams();
 
   //TODO поправить строку peopleId!, и добавить адекватную проверку
   const { data, isLoading, error } = useGetPersonByNumberQuery(peopleId!);
+  const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
-
 
   const layout = {
     labelCol: { span: 8 },
@@ -46,7 +46,9 @@ export const Editor: FC = () => {
   return (
     <>
       <h1>Star wars</h1>
-      <Button type="primary" onClick={() => navigate(-1)}>Back</Button>
+      <Button type="primary" onClick={() => navigate(-1)}>
+        Back
+      </Button>
       <Form
         {...layout}
         initialValues={data}
@@ -92,6 +94,9 @@ export const Editor: FC = () => {
           <Button type="primary" htmlType="submit">
             Submit
           </Button>
+          {/* <button onClick={() => dispatch(increment())}> */}
+          {/* count is {countFromReducer} */}
+          {/* </button> */}
         </Form.Item>
       </Form>
     </>

@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counter from "./counterReducer";
+import counter from "./redux/reducers/counterReducer";
 import { swapiApi } from "./service";
 // import { setupListeners } from "@reduxjs/toolkit/query";
 
