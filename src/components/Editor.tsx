@@ -65,28 +65,29 @@ const Editor: FC = () => {
         </Form.Item>
         <Form.Item
           name={["hair_color"]}
-          label="Height"
+          label="Hair color"
           rules={[{ type: "string" }]}>
           <Input />
         </Form.Item>
         <Form.Item
           name={["skin_color"]}
-          label="Height"
+          label="Skin color"
           rules={[{ type: "string" }]}>
           <Input />
         </Form.Item>
         <Form.Item
           name={["mass"]}
-          label="Age"
-          rules={[{ type: "number", min: 0, max: 99 }]}>
+          label="Mass"
+          rules={[{ type: "number", min: 0 }]}>
           <InputNumber />
         </Form.Item>
         <Form.Item
           name={["birth_year"]}
-          label="Age"
-          rules={[{ type: "number", min: 0, max: 99 }]}>
+          label="Birth year"
+          rules={[{ type: "string" }]}>
           <InputNumber />
         </Form.Item>
+
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
           <Button type="primary" htmlType="submit">
             Submit
