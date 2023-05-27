@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-type People = {
+export type TPeople = {
   name: string;
   height: string;
   mass: string;
@@ -18,18 +18,21 @@ type People = {
   edited: string;
   url: string;
 };
+
+export type TPeopleByPage = { results: Array<TPeople>, count: number} 
+
 // Define a service using a base URL and expected endpoints
 export const swapiApi = createApi({
   reducerPath: "swapiApi",
   baseQuery: fetchBaseQuery({ baseUrl: "https://swapi.dev/api/" }),
   endpoints: (builder) => ({
-    getPeople: builder.query<{ results: Array<People> }, void>({
+    getPeople: builder.query<{ results: Array<TPeople> }, void>({
       query: () => `people`,
     }),
-    getPersonByNumber: builder.query<People, string>({
+    getPersonByNumber: builder.query<TPeople, string>({
       query: (number) => `people/${number}`,
     }),
-    getPeopleByPage: builder.query<{ results: Array<People>, count: number }, string>({
+    getPeopleByPage: builder.query<TPeopleByPage, string>({
       query: (page) => `people/?page=${page}`,
       keepUnusedDataFor: 6,
     }),

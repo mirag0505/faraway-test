@@ -6,7 +6,7 @@ import { Button, Form, Input, InputNumber, Spin } from "antd";
 
 // }
 
-const Editor: FC = () => {
+export const Editor: FC = () => {
   const { peopleId } = useParams();
 
   //TODO поправить строку peopleId!, и добавить адекватную проверку
@@ -25,7 +25,7 @@ const Editor: FC = () => {
     types: {
       email: "${label} is not a valid email!",
       number: "${label} is not a valid number!",
-      string: "${label} is not a valid number!",
+      string: "${label} is not a valid text!",
     },
     number: {
       range: "${label} must be between ${min} and ${max}",
@@ -97,5 +97,3 @@ const Editor: FC = () => {
     </>
   );
 };
-
-export default Editor;
