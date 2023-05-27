@@ -10,9 +10,10 @@ import { useState } from "react";
 import { Spin } from "antd";
 
 function App() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState("1");
   const { data, error, isLoading } = useGetPeopleByPageQuery(query);
 
+  console.log(isLoading)
   const { Meta } = Card;
   //TODO заменить на адекватный тип
   const handleChange = (event: any) => {
@@ -23,12 +24,12 @@ function App() {
     <>
       <h1>Star wars</h1>
       <div>
-        {isLoading ? (
-          <Spin />
+        {error ? (
+          <pre>{JSON.stringify(error)}</pre>
         ) : (
           <>
-            {error ? (
-              <pre>{JSON.stringify(error)}</pre>
+            {isLoading ? (
+              <Spin />
             ) : (
               <div
                 style={{
@@ -38,8 +39,9 @@ function App() {
                 <Row gutter={16}>
                   <Pagination
                     defaultCurrent={1}
-                    total={50}
+                    total={data?.count}
                     onChange={handleChange}
+                    disabled={isLoading}
                   />
                 </Row>
                 <Row gutter={16}>
@@ -62,6 +64,7 @@ function App() {
                     defaultCurrent={1}
                     total={data?.count}
                     onChange={handleChange}
+                    disabled={isLoading}
                   />
                 </Row>
               </div>
