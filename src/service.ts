@@ -37,6 +37,7 @@ export const swapiApi = createApi({
       keepUnusedDataFor: 6,
     }),
   }),
+ 
 });
 
 // Export hooks for usage in function components, which are
