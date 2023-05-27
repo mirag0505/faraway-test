@@ -3,12 +3,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useGetPersonByNumberQuery } from "../service";
 import { Button, Form, Input, InputNumber, Spin } from "antd";
 import { useAppDispatch } from "../redux/slicer";
+import { updatePerson } from "../redux/reducers/personsInfoReducer";
 
 // type EditorProps = {}
 
 export const Editor: FC = () => {
   const { peopleId } = useParams();
-
+  const [form] = Form.useForm();
   //TODO поправить строку peopleId!, и добавить адекватную проверку
   const { data, isLoading, error } = useGetPersonByNumberQuery(peopleId!);
   const dispatch = useAppDispatch();
@@ -51,6 +52,7 @@ export const Editor: FC = () => {
       </Button>
       <Form
         {...layout}
+        form={form}
         initialValues={data}
         name="nest-messages"
         onFinish={onFinish}
@@ -80,7 +82,7 @@ export const Editor: FC = () => {
         <Form.Item
           name={["mass"]}
           label="Mass"
-          rules={[{ type: "number", min: 0 }]}>
+          rules={[{ type: "number"}]}>
           <InputNumber />
         </Form.Item>
         <Form.Item
@@ -91,12 +93,9 @@ export const Editor: FC = () => {
         </Form.Item>
 
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-          <Button type="primary" htmlType="submit">
-            Submit
+          <Button onClick={() => dispatch(updatePerson(form.getFieldsValue()))} type="primary" >
+          Local update data
           </Button>
-          {/* <button onClick={() => dispatch(increment())}> */}
-          {/* count is {countFromReducer} */}
-          {/* </button> */}
         </Form.Item>
       </Form>
     </>

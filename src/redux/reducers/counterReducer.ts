@@ -1,11 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { AppDispatch, RootState } from "../../store";
-import type { TypedUseSelectorHook } from "react-redux";
-import { useDispatch, useSelector } from "react-redux";
 
 // Define a type for the slice state
-interface CounterState {
+type CounterState = {
   value: number;
 }
 
