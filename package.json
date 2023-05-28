@@ -3,14 +3,13 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "http://mirag0505.github.io/faraway-test",
+  "homepage": "https://mirag0505.github.io/faraway-test",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "vitest",
-    "predeploy": "vite run build",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
