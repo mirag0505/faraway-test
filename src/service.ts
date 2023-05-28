@@ -34,7 +34,7 @@ export const swapiApi = createApi({
     }),
     getPeopleByPage: builder.query<TPeopleByPage, string>({
       query: (page) => `people/?page=${page}`,
-      keepUnusedDataFor: 6,
+      keepUnusedDataFor: 100,
     }),
   }),
  

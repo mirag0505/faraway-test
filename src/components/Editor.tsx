@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetPersonByNumberQuery } from "../service";
-import { Button, Form, Input, InputNumber, Spin } from "antd";
+import { Button, Form, Input, InputNumber, Spin, Typography } from "antd";
 import { useAppDispatch } from "../redux/slicer";
 import { updatePerson } from "../redux/reducers/personsInfoReducer";
 
@@ -13,6 +13,7 @@ export const Editor: FC = () => {
   //TODO поправить строку peopleId!, и добавить адекватную проверку
   const { data, isLoading, error } = useGetPersonByNumberQuery(peopleId!);
   const dispatch = useAppDispatch();
+  const { Title } = Typography;
 
   const navigate = useNavigate();
 
@@ -46,10 +47,10 @@ export const Editor: FC = () => {
 
   return (
     <>
-      <h1>Star wars</h1>
       <Button type="primary" onClick={() => navigate(-1)}>
         Back
       </Button>
+      <Title level={2}>List of starwars characters</Title>
       <Form
         {...layout}
         form={form}
@@ -79,10 +80,7 @@ export const Editor: FC = () => {
           rules={[{ type: "string" }]}>
           <Input />
         </Form.Item>
-        <Form.Item
-          name={["mass"]}
-          label="Mass"
-          rules={[{ type: "number"}]}>
+        <Form.Item name={["mass"]} label="Mass" rules={[{ type: "number" }]}>
           <InputNumber />
         </Form.Item>
         <Form.Item
@@ -93,8 +91,10 @@ export const Editor: FC = () => {
         </Form.Item>
 
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
-          <Button onClick={() => dispatch(updatePerson(form.getFieldsValue()))} type="primary" >
-          Local update data
+          <Button
+            onClick={() => dispatch(updatePerson(form.getFieldsValue()))}
+            type="primary">
+            Local update data
           </Button>
         </Form.Item>
       </Form>

@@ -22,9 +22,7 @@ export const personsInfoSlice = createSlice({
   reducers: {
     // Use the PayloadAction type to declare the contents of `action.payload`
     updatePerson: (state, action: PayloadAction<TPeople>) => {
-      console.log('state.value', state.value)
       console.log(action.payload)
-      // state.value += action.payload;
       state.value.results = [action.payload];
     },
   },

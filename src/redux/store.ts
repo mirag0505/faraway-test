@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counter from "./redux/reducers/counterReducer";
-import personsInfo from "./redux/reducers/personsInfoReducer";
-import { swapiApi } from "./service";
+import counter from "./reducers/counterReducer";
+import personsInfo from "./reducers/personsInfoReducer";
+import { swapiApi } from "../service";
 // import { setupListeners } from "@reduxjs/toolkit/query";
 
 export const store = configureStore({
