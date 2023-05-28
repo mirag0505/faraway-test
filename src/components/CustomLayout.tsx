@@ -16,7 +16,8 @@ export const CustomLayout: FC = () => {
   } = theme.useToken();
 
   return (
-    <Layout>
+    <Layout
+      style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
       <Header style={{ display: "flex", alignItems: "center" }}>
         <div style={{ display: "flex", background: "white" }}>
           <img style={{ width: "100px" }} alt={"starwars"} src={starWarsLogo} />
@@ -45,7 +46,15 @@ export const CustomLayout: FC = () => {
           </Content>
         </Layout>
       </Content>
-      <Footer style={{ textAlign: "center" }}>StarWars hometask</Footer>
+      <Footer
+        style={{
+          color: "white",
+          textAlign: "center",
+          background: "#001529",
+          marginTop: "50px",
+        }}>
+        StarWars hometask
+      </Footer>
     </Layout>
   );
 };
