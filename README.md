@@ -13,6 +13,7 @@ https://mirag0505.github.io/faraway-test/
 
 ### Условия:
 Test task for React engineer (admin panel & tools)
+
 Используя стороннее API в качестве источника данных (пример: Star Wars API
 https://swapi.dev/), реализовать SPA приложение React и Typescript, состоящее из двух страниц.
 На главной странице отобразить список или карточки персонажей, к списку добавить
