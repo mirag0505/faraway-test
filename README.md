@@ -6,7 +6,7 @@ https://mirag0505.github.io/faraway-test/
 
 #### `pnpm install` – установить зависимости проекта
 
-#### `pnpm run start` – запуск devServer
+#### `pnpm run dev` – запуск devServer
 
 #### `pnpm run build` – production сборка проекта
 
