@@ -56,6 +56,8 @@ export const Editor: FC = () => {
         form={form}
         initialValues={data}
         name="nest-messages"
+        labelCol={{ span: 8 }}
+        wrapperCol={{ span: 16 }}
         onFinish={onFinish}
         style={{ maxWidth: 600 }}
         validateMessages={validateMessages}>
@@ -90,7 +92,7 @@ export const Editor: FC = () => {
           <InputNumber />
         </Form.Item>
 
-        <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button
             onClick={() => dispatch(updatePerson(form.getFieldsValue()))}
             type="primary">

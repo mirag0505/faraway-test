@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { Layout, theme } from "antd";
-import { Outlet } from "react-router-dom";
+import { Breadcrumb, Button, Col, Layout, Row, theme } from "antd";
+import { Outlet, useNavigate } from "react-router-dom";
 import starWarsLogo from "../assets/star.png";
 
 // type CustomLayoutProps = {
@@ -9,6 +9,7 @@ import starWarsLogo from "../assets/star.png";
 
 export const CustomLayout: FC = () => {
   const { Header, Content, Footer, Sider } = Layout;
+  const navigate = useNavigate();
 
   const {
     token: { colorBgContainer },
@@ -22,13 +23,23 @@ export const CustomLayout: FC = () => {
         </div>
       </Header>
       <Content style={{ padding: "0 50px" }}>
-        <Layout style={{ padding: "24px 0", background: colorBgContainer }}>
+        <div style={{ height: "50px" }}></div>
+
+        <Layout
+          style={{
+            padding: "24px 0",
+            background: colorBgContainer,
+            display: "flex",
+          }}>
           <Content
             style={{
               maxWidth: 1240,
               margin: "auto",
               padding: "0 24px",
               minHeight: 280,
+              height: "100%",
+              width: "100%",
+              flexGrow: "1",
             }}>
             <Outlet />
           </Content>

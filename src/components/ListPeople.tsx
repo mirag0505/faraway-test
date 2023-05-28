@@ -51,7 +51,7 @@ export const ListPeople: FC<ListPeopleProps> = ({
         flexDirection: "column",
       }}>
       <Row>
-        <Col xs={2} sm={4} md={6} lg={8} xl={10}>
+        <Col md={6} lg={8} xl={10}>
           <Search
             placeholder="input search name"
             enterButton="Search"
@@ -61,10 +61,14 @@ export const ListPeople: FC<ListPeopleProps> = ({
             style={{ margin: "10px 0 20px 0" }}
           />
         </Col>
-        <Col xs={20} sm={16} md={12} lg={8} xl={4}></Col>
-        <Col xs={2} sm={4} md={6} lg={8} xl={10}></Col>
+        <Col md={12} lg={8} xl={4}></Col>
+        <Col md={6} lg={8} xl={10}></Col>
       </Row>
-      <Row gutter={16}>
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+        }}>
         {data?.results
           ?.filter((item) => {
             return item.name.toLowerCase().includes(peopleName.toLowerCase());
@@ -72,7 +76,7 @@ export const ListPeople: FC<ListPeopleProps> = ({
           .map((person) => (
             <Link
               key={person?.url}
-              style={{ flex: "0 0 20%", margin: "20px" }}
+              style={{ flex: "0 0 30%", margin: "10px" }}
               to={`people/${getNumberPersonFromUrl(person.url)}`}>
               <Card
                 hoverable
@@ -82,7 +86,7 @@ export const ListPeople: FC<ListPeopleProps> = ({
               </Card>
             </Link>
           ))}
-      </Row>
+      </div>
       <Row gutter={16} justify={"center"} align={"middle"}>
         <Pagination
           style={{ margin: "20px 0" }}
