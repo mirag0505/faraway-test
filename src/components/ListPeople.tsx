@@ -17,8 +17,8 @@ type ListPeopleProps = {
 
 export const ListPeople: FC<ListPeopleProps> = ({
   data,
-  error,
   isLoading,
+  // error,
   handleQuery,
 }) => {
   const { Search } = Input;

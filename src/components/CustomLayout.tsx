@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { Breadcrumb, Button, Col, Layout, Row, theme } from "antd";
-import { Outlet, useNavigate } from "react-router-dom";
+import { Layout, theme } from "antd";
+import { Outlet } from "react-router-dom";
 import starWarsLogo from "../assets/star.png";
 
 // type CustomLayoutProps = {
@@ -8,8 +8,7 @@ import starWarsLogo from "../assets/star.png";
 // };
 
 export const CustomLayout: FC = () => {
-  const { Header, Content, Footer, Sider } = Layout;
-  const navigate = useNavigate();
+  const { Header, Content, Footer } = Layout;
 
   const {
     token: { colorBgContainer },
