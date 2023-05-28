@@ -1,7 +1,7 @@
-import { Card, Input, Pagination, Row } from "antd";
+import { Card, Col, Input, Pagination, Row } from "antd";
 import { Dispatch, FC, SetStateAction, useState } from "react";
 import { TPeopleByPage } from "../service";
-import { Link, Search } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { getNumberPersonFromUrl } from "../utilites/getNumberPersonFromUrl";
 import starWarsLogo from "../assets/star.png";
 import { SerializedError } from "@reduxjs/toolkit";
@@ -27,10 +27,10 @@ export const ListPeople: FC<ListPeopleProps> = ({
   //TODO заменить на адекватный тип
   const handleChange = (event: any) => {
     handleQuery(event);
+    setPeopleName("");
   };
   const [peopleName, setPeopleName] = useState("");
   const onSearch = (value: string) => {
-    console.log(value);
     setPeopleName(value);
   };
 
@@ -48,21 +48,21 @@ export const ListPeople: FC<ListPeopleProps> = ({
       style={{
         display: "flex",
         flexWrap: "wrap",
+        flexDirection: "column",
       }}>
-      <Row gutter={16}>
-        <Search
-          placeholder="input search text"
-          enterButton="Search"
-          size="large"
-          suffix={suffix}
-          onSearch={onSearch}
-        />
-        <Pagination
-          defaultCurrent={1}
-          total={data?.count}
-          onChange={handleChange}
-          disabled={isLoading}
-        />
+      <Row>
+        <Col xs={2} sm={4} md={6} lg={8} xl={10}>
+          <Search
+            placeholder="input search name"
+            enterButton="Search"
+            size="large"
+            suffix={suffix}
+            onSearch={onSearch}
+            style={{ margin: "10px 0 20px 0" }}
+          />
+        </Col>
+        <Col xs={20} sm={16} md={12} lg={8} xl={4}></Col>
+        <Col xs={2} sm={4} md={6} lg={8} xl={10}></Col>
       </Row>
       <Row gutter={16}>
         {data?.results
@@ -83,12 +83,14 @@ export const ListPeople: FC<ListPeopleProps> = ({
             </Link>
           ))}
       </Row>
-      <Row gutter={16}>
+      <Row gutter={16} justify={"center"} align={"middle"}>
         <Pagination
+          style={{ margin: "20px 0" }}
           defaultCurrent={1}
           total={data?.count}
           onChange={handleChange}
           disabled={isLoading}
+          showSizeChanger={false}
         />
       </Row>
     </div>
