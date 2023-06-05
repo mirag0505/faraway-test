@@ -1,17 +1,7 @@
 import { FC } from 'react'
-import { CustomLayout } from './components/CustomLayout'
-import { Route, Routes } from 'react-router-dom'
-import { Editor } from './components/Editor'
-import { HomePage } from './pages/HomePage.tsx'
+import { ErrorBoundary } from 'react-error-boundary'
+import { routs } from './routes.tsx'
 
 export const App: FC = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<CustomLayout />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/people/:peopleId" element={<Editor />} />
-        <Route path="*" element={'Error'} />
-      </Route>
-    </Routes>
-  )
+  return <ErrorBoundary fallback={<div>Something went wrong</div>}>{routs}</ErrorBoundary>
 }
