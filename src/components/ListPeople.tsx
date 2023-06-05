@@ -6,7 +6,6 @@ import { getNumberPersonFromUrl } from '../utilites/getNumberPersonFromUrl'
 import starWarsLogo from '../assets/star.png'
 import { SerializedError } from '@reduxjs/toolkit'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
-import { AudioOutlined } from '@ant-design/icons'
 
 type ListPeopleProps = {
   data: TPeopleByPage
@@ -33,15 +32,6 @@ export const ListPeople: FC<ListPeopleProps> = ({
     setPeopleName(value)
   }
 
-  const suffix = (
-    <AudioOutlined
-      style={{
-        fontSize: 16,
-        color: '#1677ff',
-      }}
-    />
-  )
-
   return (
     <div
       style={{
@@ -51,14 +41,7 @@ export const ListPeople: FC<ListPeopleProps> = ({
       }}>
       <Row>
         <Col md={6} lg={8} xl={10}>
-          <Search
-            placeholder="input search name"
-            enterButton="Search"
-            size="large"
-            suffix={suffix}
-            onSearch={onSearch}
-            style={{ margin: '10px 0 20px 0' }}
-          />
+          <Search placeholder="input search name" enterButton="Search" size="large" onSearch={onSearch} style={{ margin: '10px 0 20px 0' }} />
         </Col>
         <Col md={12} lg={8} xl={4}></Col>
         <Col md={6} lg={8} xl={10}></Col>
