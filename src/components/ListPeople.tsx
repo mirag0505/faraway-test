@@ -1,19 +1,19 @@
-import { Card, Col, Input, Pagination, Row } from "antd";
-import { Dispatch, FC, SetStateAction, useState } from "react";
-import { TPeopleByPage } from "../service";
-import { Link } from "react-router-dom";
-import { getNumberPersonFromUrl } from "../utilites/getNumberPersonFromUrl";
-import starWarsLogo from "../assets/star.png";
-import { SerializedError } from "@reduxjs/toolkit";
-import { FetchBaseQueryError } from "@reduxjs/toolkit/dist/query";
-import { AudioOutlined } from "@ant-design/icons";
+import { Card, Col, Input, Pagination, Row } from 'antd'
+import { Dispatch, FC, SetStateAction, useState } from 'react'
+import { TPeopleByPage } from '../service'
+import { Link } from 'react-router-dom'
+import { getNumberPersonFromUrl } from '../utilites/getNumberPersonFromUrl'
+import starWarsLogo from '../assets/star.png'
+import { SerializedError } from '@reduxjs/toolkit'
+import { FetchBaseQueryError } from '@reduxjs/toolkit/dist/query'
+import { AudioOutlined } from '@ant-design/icons'
 
 type ListPeopleProps = {
-  data: TPeopleByPage;
-  error: FetchBaseQueryError | SerializedError | undefined;
-  isLoading: boolean;
-  handleQuery: Dispatch<SetStateAction<string>>;
-};
+  data: TPeopleByPage
+  error: FetchBaseQueryError | SerializedError | undefined
+  isLoading: boolean
+  handleQuery: Dispatch<SetStateAction<string>>
+}
 
 export const ListPeople: FC<ListPeopleProps> = ({
   data,
@@ -21,34 +21,33 @@ export const ListPeople: FC<ListPeopleProps> = ({
   // error,
   handleQuery,
 }) => {
-  const { Search } = Input;
-  const { Meta } = Card;
+  const { Search } = Input
+  const { Meta } = Card
 
-  //TODO заменить на адекватный тип
-  const handleChange = (event: any) => {
-    handleQuery(event);
-    setPeopleName("");
-  };
-  const [peopleName, setPeopleName] = useState("");
+  const handleChange = (page: number): void => {
+    page && handleQuery(String(page))
+    setPeopleName('')
+  }
+  const [peopleName, setPeopleName] = useState('')
   const onSearch = (value: string) => {
-    setPeopleName(value);
-  };
+    setPeopleName(value)
+  }
 
   const suffix = (
     <AudioOutlined
       style={{
         fontSize: 16,
-        color: "#1677ff",
+        color: '#1677ff',
       }}
     />
-  );
+  )
 
   return (
     <div
       style={{
-        display: "flex",
-        flexWrap: "wrap",
-        flexDirection: "column",
+        display: 'flex',
+        flexWrap: 'wrap',
+        flexDirection: 'column',
       }}>
       <Row>
         <Col md={6} lg={8} xl={10}>
@@ -58,7 +57,7 @@ export const ListPeople: FC<ListPeopleProps> = ({
             size="large"
             suffix={suffix}
             onSearch={onSearch}
-            style={{ margin: "10px 0 20px 0" }}
+            style={{ margin: '10px 0 20px 0' }}
           />
         </Col>
         <Col md={12} lg={8} xl={4}></Col>
@@ -66,30 +65,24 @@ export const ListPeople: FC<ListPeopleProps> = ({
       </Row>
       <div
         style={{
-          display: "flex",
-          flexWrap: "wrap",
+          display: 'flex',
+          flexWrap: 'wrap',
         }}>
         {data?.results
           ?.filter((item) => {
-            return item.name.toLowerCase().includes(peopleName.toLowerCase());
+            return item.name.toLowerCase().includes(peopleName.toLowerCase())
           })
           .map((person) => (
-            <Link
-              key={person?.url}
-              style={{ flex: "0 0 30%", margin: "10px" }}
-              to={`people/${getNumberPersonFromUrl(person.url)}`}>
-              <Card
-                hoverable
-                bordered={false}
-                cover={<img alt={person?.url} src={starWarsLogo} />}>
+            <Link key={person?.url} style={{ flex: '0 0 30%', margin: '10px' }} to={`people/${getNumberPersonFromUrl(person.url)}`}>
+              <Card hoverable bordered={false} cover={<img alt={person?.url} src={starWarsLogo} />}>
                 <Meta title={person?.name} description={person?.url} />
               </Card>
             </Link>
           ))}
       </div>
-      <Row gutter={16} justify={"center"} align={"middle"}>
+      <Row gutter={16} justify={'center'} align={'middle'}>
         <Pagination
-          style={{ margin: "20px 0" }}
+          style={{ margin: '20px 0' }}
           defaultCurrent={1}
           total={data?.count}
           onChange={handleChange}
@@ -98,5 +91,5 @@ export const ListPeople: FC<ListPeopleProps> = ({
         />
       </Row>
     </div>
-  );
-};
+  )
+}
