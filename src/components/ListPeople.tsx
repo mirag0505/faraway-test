@@ -12,24 +12,29 @@ type ListPeopleProps = {
   error: FetchBaseQueryError | SerializedError | undefined
   isLoading: boolean
   handleQuery: Dispatch<SetStateAction<string>>
+  handleSearch: Dispatch<SetStateAction<string>>
 }
 
 export const ListPeople: FC<ListPeopleProps> = ({
   data,
   isLoading,
   // error,
+  handleSearch,
   handleQuery,
 }) => {
   const { Search } = Input
   const { Meta } = Card
 
+  const [currentPage, setCurrentPage] = useState(1)
   const handleChange = (page: number): void => {
     page && handleQuery(String(page))
-    setPeopleName('')
+    page && setCurrentPage(page)
   }
-  const [peopleName, setPeopleName] = useState('')
+
   const onSearch = (value: string) => {
-    setPeopleName(value)
+    setCurrentPage(1)
+    handleQuery(String(1))
+    handleSearch(value)
   }
 
   return (
@@ -51,22 +56,20 @@ export const ListPeople: FC<ListPeopleProps> = ({
           display: 'flex',
           flexWrap: 'wrap',
         }}>
-        {data?.results
-          ?.filter((item) => {
-            return item.name.toLowerCase().includes(peopleName.toLowerCase())
-          })
-          .map((person) => (
-            <Link key={person?.url} style={{ flex: '0 0 30%', margin: '10px' }} to={`people/${getNumberPersonFromUrl(person.url)}`}>
-              <Card hoverable bordered={false} cover={<img alt={person?.url} src={starWarsLogo} />}>
-                <Meta title={person?.name} description={person?.url} />
-              </Card>
-            </Link>
-          ))}
+        {data?.results.length === 0 && 'Not found'}
+        {data?.results.map((person) => (
+          <Link key={person?.url} style={{ flex: '0 0 30%', margin: '10px' }} to={`people/${getNumberPersonFromUrl(person.url)}`}>
+            <Card hoverable bordered={false} cover={<img alt={person?.url} src={starWarsLogo} />}>
+              <Meta title={person?.name} description={person?.url} />
+            </Card>
+          </Link>
+        ))}
       </div>
       <Row gutter={16} justify={'center'} align={'middle'}>
         <Pagination
           style={{ margin: '20px 0' }}
           defaultCurrent={1}
+          current={currentPage}
           total={data?.count}
           onChange={handleChange}
           disabled={isLoading}

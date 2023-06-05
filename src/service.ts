@@ -32,9 +32,8 @@ export const swapiApi = createApi({
     getPersonByNumber: builder.query<TPeople, string>({
       query: (number) => `people/${number}`,
     }),
-    getPeopleByPage: builder.query<TPeopleByPage, string>({
-      query: (page) => `people/?page=${page}`,
-      keepUnusedDataFor: 100,
+    getPeopleByPage: builder.query<TPeopleByPage, { page: string; search: string }>({
+      query: ({ page, search }) => `people/?page=${page}&search=${search}`,
     }),
   }),
 })

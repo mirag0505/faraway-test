@@ -7,7 +7,9 @@ import { ListPeople } from '../components/ListPeople.tsx'
 
 export const HomePage: FC = () => {
   const [query, setQuery] = useState('1')
-  const { data, error, isLoading } = useGetPeopleByPageQuery(query)
+  const [search, setSearch] = useState('')
+
+  const { data, error, isLoading } = useGetPeopleByPageQuery({ page: query, search: search })
   const { Title } = Typography
 
   return (
@@ -15,7 +17,7 @@ export const HomePage: FC = () => {
       <Title level={2}>Star wars</Title>
       {error && <pre>{JSON.stringify(error)}</pre>}
       {isLoading && <Spin style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }} />}
-      {data && <ListPeople data={data} error={error} isLoading={isLoading} handleQuery={setQuery} />}
+      {data && <ListPeople data={data} error={error} isLoading={isLoading} handleQuery={setQuery} handleSearch={setSearch} />}
     </div>
   )
 }
