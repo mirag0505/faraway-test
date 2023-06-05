@@ -1,4 +1,3 @@
-import './App.css'
 import { FC } from 'react'
 import { CustomLayout } from './components/CustomLayout'
 import { Route, Routes } from 'react-router-dom'
